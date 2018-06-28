@@ -4523,6 +4523,17 @@
       <field type="uint8_t" name="type" enum="LANDING_TARGET_TYPE">Type of landing target</field>
       <field type="uint8_t" name="position_valid">Boolean indicating whether the position fields (x, y, z, q, type) contain valid target position information (valid: 1, invalid: 0). Default is 0 (invalid).</field>
     </message>
+    <message id="150" name="LANDING_TARGET_LSF_INT">
+      <description>The location of a landing area captured from LSF</description>
+      <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
+      <field type="uint16_t" name="target_id">The ID of the target if multiple targets are present</field>
+      <field type="uint8_t" name="frame">The coordinate system of the LANDING_TARGET_LSF_INT. see MAV_FRAME in mavlink_types.h</field>
+      <field type="int32_t" name="x">local: x position in meters * 1e4, global: latitude in degrees * 10^7</field>
+      <field type="int32_t" name="y">local: y position in meters * 1e4, global: longitude in degrees *10^7</field>
+      <field type="float" name="z">altitude in meters (relative or absolute, depending on frame.</field>
+      <field type="uint8_t" name="rank">Percentage; indicates suitability of this site for landing</field>
+      <field type="float[4]" name="q">Quaternion of landing target orientation (w, x, y, z order, zero-rotation is 1, 0, 0, 0)</field>
+    </message>
     <!-- MESSAGE IDs 180 - 229: Space for custom messages in individual projectname_messages.xml files -->
     <message id="230" name="ESTIMATOR_STATUS">
       <description>Estimator status message including flags, innovation test ratios and estimated accuracies. The flags message is an integer bitmask containing information on which EKF outputs are valid. See the ESTIMATOR_STATUS_FLAGS enum definition for further information. The innovation test ratios show the magnitude of the sensor innovation divided by the innovation check threshold. Under normal operation the innovation test ratios should be below 0.5 with occasional values up to 1.0. Values greater than 1.0 should be rare under normal operation and indicate that a measurement has been rejected by the filter. The user should be notified if an innovation test ratio greater than 1.0 is recorded. Notifications for values in the range between 0.5 and 1.0 should be optional and controllable by the user.</description>
